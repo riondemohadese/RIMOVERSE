@@ -119,7 +119,23 @@
         }
     </style>
 </head>
+<script>
+    (function() {
+      const SECRET_KEY = "jaan2026"; // Set your password here
+      const AUTH_KEY = "rimo_authenticated";
 
+      if (sessionStorage.getItem(AUTH_KEY) !== "true") {
+        let pass = prompt("Enter the private sanctuary key:");
+        if (pass === SECRET_KEY) {
+          sessionStorage.setItem(AUTH_KEY, "true");
+        } else {
+          alert("Access denied.");
+          document.body.innerHTML = "<div style='background:#0b0806;color:#d4af37;height:100vh;display:flex;align-items:center;justify-content:center;font-family:serif;font-size:24px;'>Sanctuary Locked.</div>";
+        }
+      }
+    })();
+  </script>
+    
 <body class="bg-estateDark text-[#dcd1be] font-sans selection:bg-brass-antique/40 selection:text-brass-light relative overflow-x-hidden min-h-screen">
 
     <!-- Subtle Candlelight Dust Canvas -->
