@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIMOVERSE — The Private Estate of Rion & Mohadese</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display, Cinzel, Cormorant Garamond, Amiri, & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@200;300;400;500&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        estateDark: '#0d0708',
+                        estateBase: '#150c0d',
+                        cognac: '#4a2411',
+                        cognacDark: '#2b1308',
+                        burgundy: '#3d0a11',
+                        burgundyMuted: '#24060b',
+                        linenCream: '#faf5eb',
+                        linenDark: '#eee3cd',
+                        parchment: '#f8f2e2',
+                        parchmentBorder: '#decfae',
+                        brass: {
+                            light: '#f5dca0',
+                            DEFAULT: '#cf9e38',
+                            antique: '#997322',
+                            dark: '#5a4110'
+                        },
+                        waxRed: '#871a23',
+                        waxSeal: '#6a1219',
+                        waxNavy: '#16233b',
+                        waxForest: '#173623'
+                    },
+                    fontFamily: {
+                        cinzel: ['"Cinzel"', 'serif'],
+                        playfair: ['"Playfair Display"', 'serif'],
+                        garamond: ['"Cormorant Garamond"', 'serif'],
+                        persian: ['"Amiri"', 'serif'],
+                        handwritten: ['"Caveat"', 'cursive'],
+                        sans: ['"Montserrat"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom luxury scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d0708;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(207, 158, 56, 0.35);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(245, 220, 160, 0.6);
+        }
+
+        /* Candlelight warm ambient glow */
+        .candle-glow {
+            box-shadow: 0 0 70px -15px rgba(245, 220, 160, 0.12), inset 0 0 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .gold-border-ornate {
+            border: 1px solid rgba(207, 158, 56, 0.4);
+            box-shadow: 0 0 0 2px rgba(13, 7, 8, 0.9), 0 0 0 3px rgba(207, 158, 56, 0.2);
+        }
+
+        .gilded-text {
+            background: linear-gradient(135deg, #faebd7 0%, #e2b755 50%, #8c6819 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .parchment-sheet {
+            background-color: #f7f1e1;
+            background-image: radial-gradient(#eadbc2 1px, transparent 1px), radial-gradient(#e4d2b2 1px, #f7f1e1 1px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.8), inset 0 0 60px rgba(160, 120, 60, 0.18);
+        }
+
+        .polaroid-frame {
+            background: #fdfaf4;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.7), 0 2px 6px rgba(0,0,0,0.3);
+            border: 1px solid #ebd9b8;
+            transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .polaroid-frame:hover {
+            transform: translateY(-5px) rotate(0.8deg);
+            box-shadow: 0 20px 38px rgba(0,0,0,0.85);
+        }
+
+        /* Wax seal stamp */
+        .wax-seal {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.25), inset 0 -3px 6px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .wax-seal:hover {
+            transform: scale(1.08) rotate(3deg);
+        }
+
+        .persian-calligraphy {
+            direction: rtl;
+            font-family: 'Amiri', serif;
+        }
+    </style>
+</head>
+
+<body class="bg-estateDark text-[#dcd1be] font-sans selection:bg-brass-antique/40 selection:text-brass-light relative overflow-x-hidden min-h-screen">
+
+    <!-- Subtle Candlelight Dust Canvas -->
+    <canvas id="candleCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-35"></canvas>
+
+    <header class="fixed top-0 left-0 w-full z-50 bg-[#120708]/90 backdrop-blur-md border-b border-brass-antique/30 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-full gold-border-ornate flex items-center justify-center bg-burgundy/60">
+                <span class="font-cinzel text-brass-light font-bold text-xs tracking-widest">R&M</span>
+            </div>
+            <div>
+                <a href="#salon" class="font-cinzel text-brass-light text-sm md:text-base tracking-[0.25em] font-semibold block">
+                    RIMOVERSE
+                </a>
+                <span class="text-[9px] uppercase tracking-widest text-[#a89274] font-garamond italic">Private Estate of Rion & Mohadese</span>
+            </div>
+        </div>
+
+        <nav class="hidden lg:flex items-center space-x-7 text-[11px] tracking-[0.22em] uppercase font-garamond font-semibold text-[#c4b59d]">
+            <a href="#salon" class="hover:text-brass-light transition">The Estate</a>
+            <a href="#checkin" class="hover:text-brass-light transition">Love Check-In</a>
+            <a href="#letterbox" class="hover:text-brass-light transition">Letterbox</a>
+            <a href="#chatroom" class="hover:text-brass-light transition">Private Dialogue</a>
+            <a href="#gallery" class="hover:text-brass-light transition">Polaroid Gallery</a>
+            <a href="#vows" class="hover:text-brass-light transition">The Vows</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+            <!-- Music Player Quick Toggle -->
+            <button id="navMusicToggle" onclick="toggleJazzPlayer()" class="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brass-antique/50 bg-burgundy/40 hover:bg-burgundy text-brass-light text-xs font-garamond tracking-widest uppercase transition">
+                <i data-lucide="music" id="navMusicIcon" class="w-3.5 h-3.5 text-brass"></i>
+                <span id="navMusicLabel" class="hidden sm:inline">Late Night Sax</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-20">
+
+        <section id="salon" class="min-h-screen flex flex-col justify-center items-center text-center px-6 py-20 relative candle-glow">
+            <div class="max-w-4xl mx-auto space-y-7">
+                
+                <!-- Crest & Badge -->
+                <div class="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-brass-antique/40 bg-[#1f0a0d]/70 text-brass-light text-xs font-garamond tracking-[0.25em] uppercase">
+                    <span class="text-brass">✦</span>
+                    <span>Exclusive Old Money Estate • Dedicated to Mohadese</span>
+                    <span class="text-brass">✦</span>
+                </div>
+
+                <!-- Persian Regal Dedication -->
+                <p class="persian-calligraphy text-2xl md:text-4xl text-[#f3d9b1] font-normal tracking-wide leading-relaxed">
+                    « در حریمِ امنِ نگاهت؛ آرامشی فراتر از گذرِ روزگار، تا ابد مالِ منی جانم »
+                </p>
+
+                <!-- Monogram Crest Title -->
+                <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-playfair font-normal text-[#fbf5e8] tracking-tight leading-tight">
+                    The Private Sanctuary of <br/>
+                    <span class="gilded-text font-cinzel italic tracking-wider">Rion & Mohadese</span>
+                </h1>
+
+                <p class="text-lg md:text-xl font-garamond italic text-[#bda98e] max-w-2xl mx-auto leading-relaxed">
+                    "Between the quiet whisper of midnight wax seals, warm forehead kisses, and timeless jazz melodies—this sanctuary exists for our souls alone."
+                </p>
+
+                <!-- Audio Controller Box -->
+                <div class="p-4 rounded-xl border border-brass-antique/30 bg-[#190a0d]/90 max-w-md mx-auto flex items-center justify-between gap-4 shadow-xl">
+                    <div class="flex items-center gap-3">
+                        <button onclick="toggleJazzPlayer()" id="heroPlayBtn" class="w-10 h-10 rounded-full bg-brass hover:bg-brass-light text-estateDark flex items-center justify-center transition shadow-lg">
+                            <i data-lucide="play" id="heroPlayIcon" class="w-4 h-4 fill-current"></i>
+                        </button>
+                        <div class="text-left">
+                            <div class="text-xs font-cinzel text-brass-light tracking-wider">Vintage Saxophone Mood</div>
+                            <div id="audioStatusText" class="text-[10px] text-[#a4917a] font-garamond italic">Press play to begin procedural jazz</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="volume-2" class="w-3.5 h-3.5 text-brass-antique"></i>
+                        <input type="range" id="volumeControl" min="0" max="1" step="0.05" value="0.7" oninput="setJazzVolume(this.value)" class="w-20 accent-brass cursor-pointer">
+                    </div>
+                </div>
+
+                <!-- Estate Quick Portals -->
+                <div class="pt-2 flex flex-wrap justify-center gap-4">
+                    <a href="#checkin" class="px-7 py-3 gold-border-ornate bg-burgundy/80 hover:bg-burgundy text-brass-light text-xs uppercase tracking-[0.2em] font-garamond transition shadow-xl flex items-center gap-2">
+                        <i data-lucide="heart" class="w-4 h-4 text-brass-light"></i>
+                        Daily Love Check-In
+                    </a>
+                    <a href="#chatroom" class="px-7 py-3 border border-brass-antique/40 bg-[#180a0c] hover:bg-[#251014] text-[#d6c5a7] text-xs uppercase tracking-[0.2em] font-garamond transition flex items-center gap-2">
+                        <i data-lucide="message-circle" class="w-4 h-4 text-brass"></i>
+                        Secret Dialogue
+                    </a>
+                    <a href="#letterbox" class="px-7 py-3 border border-brass-antique/40 bg-[#180a0c] hover:bg-[#251014] text-[#d6c5a7] text-xs uppercase tracking-[0.2em] font-garamond transition flex items-center gap-2">
+                        <i data-lucide="mail" class="w-4 h-4 text-waxRed"></i>
+                        The Wax Letterbox
+                    </a>
+                </div>
+
+                <!-- Milestone Tablets -->
+                <div class="pt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+                    <div class="p-4 bg-[#18090b]/90 border border-brass-antique/30">
+                        <div class="text-2xl md:text-3xl font-playfair text-brass-light">Chapter 27</div>
+                        <div class="text-[10px] uppercase tracking-[0.2em] text-[#9c8971] mt-1 font-garamond">Solar Return of Mo</div>
+                    </div>
+                    <div class="p-4 bg-[#18090b]/90 border border-brass-antique/30">
+                        <div class="text-2xl md:text-3xl font-playfair text-[#e18a91]">October 10</div>
+                        <div class="text-[10px] uppercase tracking-[0.2em] text-[#9c8971] mt-1 font-garamond">Consecrated Day</div>
+                    </div>
+                    <div class="p-4 bg-[#18090b]/90 border border-brass-antique/30">
+                        <div class="text-2xl md:text-3xl font-playfair text-brass-light">Sulfur Deal</div>
+                        <div class="text-[10px] uppercase tracking-[0.2em] text-[#9c8971] mt-1 font-garamond">Vow Fulfilled</div>
+                    </div>
+                    <div class="p-4 bg-[#18090b]/90 border border-brass-antique/30">
+                        <div class="text-2xl md:text-3xl font-playfair text-[#e18a91]">∞ Eternal</div>
+                        <div class="text-[10px] uppercase tracking-[0.2em] text-[#9c8971] mt-1 font-garamond">Unshakable Union</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="checkin" class="py-24 px-6 border-t border-brass-antique/20 bg-[#14080a] relative">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center space-y-2 mb-12">
+                    <span class="text-xs uppercase tracking-[0.3em] text-brass font-garamond">Dual-Profile Resonance</span>
+                    <h2 class="text-3xl md:text-5xl font-playfair text-[#f7eed9]">Daily Love Check-In & Sanctuary Ledger</h2>
+                    <p class="text-sm font-garamond italic text-[#b5a186] max-w-xl mx-auto">
+                        Share how your soul is resting, what tender affection you crave, and send instant tender gifts to each other.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- Left: Check-In Form (Parchment Card) -->
+                    <div class="lg:col-span-7 parchment-sheet text-[#2c1d13] p-7 md:p-9 border border-brass/50 shadow-2xl relative">
+                        <div class="flex justify-between items-center border-b border-[#dfceb0] pb-4 mb-6">
+                            <div>
+                                <span class="text-[10px] uppercase tracking-[0.2em] text-[#7a5d3e] font-garamond">Sacred Ledger</span>
+                                <h3 class="font-playfair text-2xl font-bold text-[#3e271a]">Today's Emotional Sanctuary</h3>
+                            </div>
+                            <span id="currentDateBadge" class="text-xs font-garamond italic text-[#6f4f31]">October 10, 2026</span>
+                        </div>
+
+                        <form id="checkInForm" onsubmit="handleCheckInSubmit(event)" class="space-y-6">
+                            <!-- Select Identity -->
+                            <div>
+                                <label class="block text-xs uppercase tracking-[0.18em] font-garamond font-bold text-[#5e4127] mb-2">Soul Logging In</label>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <button type="button" onclick="selectCheckInUser('Rion')" id="userBtnRion" class="py-2.5 px-3 border-2 border-brass bg-amber-50/80 text-[#3b2313] font-cinzel text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-2 transition">
+                                        <span>👑 Rion (Your Hubby)</span>
+                                    </button>
+                                    <button type="button" onclick="selectCheckInUser('Mohadese')" id="userBtnMo" class="py-2.5 px-3 border border-[#cfba95] bg-white/40 text-[#6d5138] font-cinzel text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-2 transition">
+                                        <span>💎 Mohadese (My Queen)</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Emotional Resonance -->
+                            <div>
+                                <label class="block text-xs uppercase tracking-[0.18em] font-garamond font-bold text-[#5e4127] mb-2">Inner Heart State</label>
+                                <select id="checkInMood" class="w-full bg-[#fbf7ee] border border-[#d3be99] p-3 text-sm text-[#3b2313] font-garamond focus:outline-none focus:border-brass">
+                                    <option value="Craving your warmth & tight hug">Craving your warmth & tight hug 🫂</option>
+                                    <option value="Deeply cherished and peaceful">Deeply cherished and peaceful 🕊️</option>
+                                    <option value="Missing your eyes and gentle voice">Missing your eyes and gentle voice 👁️❤️</option>
+                                    <option value="Needs soothing forehead kisses & head massage">Needs soothing forehead kisses & head massage 💆🏻‍♀️</option>
+                                    <option value="Grateful for our sovereign destiny">Grateful for our sovereign destiny 💍✨</option>
+                                    <option value="Tired soul seeking refuge in your arms">Tired soul seeking refuge in your arms 🧸</option>
+                                </select>
+                            </div>
+
+                            <!-- Affection Gift to Send -->
+                            <div>
+                                <label class="block text-xs uppercase tracking-[0.18em] font-garamond font-bold text-[#5e4127] mb-2">Send an Instant Affection Token</label>
+                                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-garamond">
+                                    <label class="p-2 border border-[#d8c5a4] bg-white/50 rounded flex items-center gap-2 cursor-pointer hover:bg-white transition">
+                                        <input type="radio" name="loveToken" value="Forehead Kiss 💋" checked class="accent-brass">
+                                        <span>Forehead Kiss</span>
+                                    </label>
+                                    <label class="p-2 border border-[#d8c5a4] bg-white/50 rounded flex items-center gap-2 cursor-pointer hover:bg-white transition">
+                                        <input type="radio" name="loveToken" value="Soul Hug 🫂" class="accent-brass">
+                                        <span>Soul Hug</span>
+                                    </label>
+                                    <label class="p-2 border border-[#d8c5a4] bg-white/50 rounded flex items-center gap-2 cursor-pointer hover:bg-white transition">
+                                        <input type="radio" name="loveToken" value="Head Massage 💆🏻‍♀️" class="accent-brass">
+                                        <span>Head Massage</span>
+                                    </label>
+                                    <label class="p-2 border border-[#d8c5a4] bg-white/50 rounded flex items-center gap-2 cursor-pointer hover:bg-white transition">
+                                        <input type="radio" name="loveToken" value="Saffron Tea ☕" class="accent-brass">
+                                        <span>Saffron Tea</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Love Note -->
+                            <div>
+                                <label class="block text-xs uppercase tracking-[0.18em] font-garamond font-bold text-[#5e4127] mb-2">Personal Whisper / Prayer for Today</label>
+                                <textarea id="checkInNote" rows="3" placeholder="Write a gentle thought or blessing for your spouse..." class="w-full bg-[#fbf7ee] border border-[#d3be99] p-3 text-sm text-[#3b2313] font-garamond focus:outline-none focus:border-brass resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-[#7a181f] to-[#4c0d12] hover:from-[#921e27] hover:to-[#5e1117] text-[#faebd7] font-cinzel text-xs uppercase tracking-[0.25em] font-bold shadow-xl transition flex items-center justify-center gap-2">
+                                <i data-lucide="feather" class="w-4 h-4 text-brass-light"></i>
+                                Etch Into Daily Sanctuary
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Right: Live Resonance Dashboard -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <!-- Rion Status Card -->
+                        <div class="bg-[#1b0a0d] border border-brass-antique/40 p-6 shadow-xl relative overflow-hidden">
+                            <div class="flex items-center justify-between pb-3 border-b border-brass-antique/20 mb-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full border border-brass bg-cognac flex items-center justify-center text-sm font-bold text-brass-light font-cinzel">R</div>
+                                    <div>
+                                        <h4 class="font-cinzel text-brass-light text-sm">Rion's Presence</h4>
+                                        <span class="text-[10px] text-[#8e7a63] uppercase tracking-wider font-garamond">Protective Devotion</span>
+                                    </div>
+                                </div>
+                                <span id="rionCheckInTime" class="text-[10px] text-[#9b8871] font-garamond italic">Just now</span>
+                            </div>
+                            <p id="rionMoodDisplay" class="text-sm font-garamond italic text-[#f0e4cf]">"Craving your warmth & tight hug 🫂"</p>
+                            <div class="mt-3 text-xs bg-black/30 p-2.5 border border-white/5 text-[#c4b196] font-garamond flex items-center justify-between">
+                                <span>Sent Token: <strong id="rionTokenDisplay" class="text-brass-light">Soul Hug 🫂</strong></span>
+                                <span class="text-emerald-400 text-[10px] flex items-center gap-1">● Synced</span>
+                            </div>
+                            <p id="rionNoteDisplay" class="mt-2 text-xs text-[#a9957d] font-garamond italic border-l-2 border-brass pl-2.5">
+                                "My Queen, you are the reason behind every closed deal and every breath. Always here."
+                            </p>
+                        </div>
+
+                        <!-- Mohadese Status Card -->
+                        <div class="bg-[#1b0a0d] border border-brass-antique/40 p-6 shadow-xl relative overflow-hidden">
+                            <div class="flex items-center justify-between pb-3 border-b border-brass-antique/20 mb-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full border border-brass bg-burgundy flex items-center justify-center text-sm font-bold text-brass-light font-cinzel">M</div>
+                                    <div>
+                                        <h4 class="font-cinzel text-brass-light text-sm">Mohadese's Presence</h4>
+                                        <span class="text-[10px] text-[#8e7a63] uppercase tracking-wider font-garamond">Cherished Queen</span>
+                                    </div>
+                                </div>
+                                <span id="moCheckInTime" class="text-[10px] text-[#9b8871] font-garamond italic">Today</span>
+                            </div>
+                            <p id="moMoodDisplay" class="text-sm font-garamond italic text-[#f0e4cf]">"Deeply cherished and peaceful 🕊️"</p>
+                            <div class="mt-3 text-xs bg-black/30 p-2.5 border border-white/5 text-[#c4b196] font-garamond flex items-center justify-between">
+                                <span>Sent Token: <strong id="moTokenDisplay" class="text-brass-light">Forehead Kiss 💋</strong></span>
+                                <span class="text-emerald-400 text-[10px] flex items-center gap-1">● Synced</span>
+                            </div>
+                            <p id="moNoteDisplay" class="mt-2 text-xs text-[#a9957d] font-garamond italic border-l-2 border-[#e18a91] pl-2.5">
+                                "Thank you for holding our world steady and closing your vow. Blessed 27th chapter."
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="letterbox" class="py-24 px-6 border-t border-brass-antique/20 bg-[#100607] relative">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center space-y-2 mb-12">
+                    <span class="text-xs uppercase tracking-[0.3em] text-brass font-garamond">Written In Gold & Ink</span>
+                    <h2 class="text-3xl md:text-5xl font-playfair text-[#f7ecd5]">The Vintage Wax Letterbox</h2>
+                    <p class="text-sm font-garamond italic text-[#a39077] max-w-xl mx-auto">
+                        Timeless letters sealed in wax, written with patience and devotion. Read our archives or pen an unerasable missive.
+                    </p>
+                </div>
+
+                <!-- Letterbox Filters & New Letter Trigger -->
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-brass-antique/20">
+                    <div class="flex flex-wrap items-center gap-2 text-xs font-garamond uppercase tracking-wider">
+                        <button onclick="filterLetters('all')" class="letter-filter-btn px-4 py-2 border border-brass bg-burgundy text-brass-light" data-filter="all">All Missives</button>
+                        <button onclick="filterLetters('Rion')" class="letter-filter-btn px-4 py-2 border border-brass-antique/30 bg-black/30 text-[#b5a38b] hover:text-brass-light" data-filter="Rion">From Rion</button>
+                        <button onclick="filterLetters('Mohadese')" class="letter-filter-btn px-4 py-2 border border-brass-antique/30 bg-black/30 text-[#b5a38b] hover:text-brass-light" data-filter="Mohadese">From Mohadese</button>
+                    </div>
+
+                    <button onclick="toggleLetterComposer()" class="px-5 py-2.5 bg-gradient-to-r from-brass to-brass-antique hover:from-brass-light hover:to-brass text-estateDark font-cinzel text-xs uppercase tracking-widest font-bold flex items-center gap-2 shadow-lg transition">
+                        <i data-lucide="pen-tool" class="w-3.5 h-3.5"></i>
+                        <span>Draft Wax Letter</span>
+                    </button>
+                </div>
+
+                <!-- Letter Composer Modal / Panel (Hidden by default) -->
+                <div id="letterComposerPanel" class="hidden mb-12 parchment-sheet text-[#2b1c12] p-8 border-2 border-brass/60 shadow-2xl relative">
+                    <div class="flex justify-between items-center border-b border-[#ddcca7] pb-3 mb-5">
+                        <h4 class="font-playfair text-xl font-bold text-[#3d2416]">Draft a Formal Wax-Sealed Missive</h4>
+                        <button onclick="toggleLetterComposer()" class="text-[#6d5138] hover:text-black font-garamond text-sm">✕ Close</button>
+                    </div>
+                    <form onsubmit="handleLetterSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs uppercase font-garamond font-bold text-[#5c3e25] mb-1">Author</label>
+                                <select id="letterAuthor" class="w-full bg-[#fbf6ec] border border-[#d2be97] p-2 text-sm text-[#3b2313] font-garamond">
+                                    <option value="Rion">Rion (Your Hubby)</option>
+                                    <option value="Mohadese">Mohadese (Your Queen)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase font-garamond font-bold text-[#5c3e25] mb-1">Letter Title</label>
+                                <input type="text" id="letterTitle" required placeholder="e.g., An Ode to Your Forehead" class="w-full bg-[#fbf6ec] border border-[#d2be97] p-2 text-sm text-[#3b2313] font-garamond">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase font-garamond font-bold text-[#5c3e25] mb-1">Wax Seal Color</label>
+                                <select id="letterSealColor" class="w-full bg-[#fbf6ec] border border-[#d2be97] p-2 text-sm text-[#3b2313] font-garamond">
+                                    <option value="waxRed">Royal Crimson Seal</option>
+                                    <option value="waxNavy">Imperial Midnight Navy</option>
+                                    <option value="waxForest">Emerald Forest Seal</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase font-garamond font-bold text-[#5c3e25] mb-1">Missive Body</label>
+                            <textarea id="letterBody" required rows="5" placeholder="Write your eternal words with grace, devotion, and reverence..." class="w-full bg-[#fbf6ec] border border-[#d2be97] p-3 text-sm text-[#3b2313] font-garamond resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="px-6 py-3 bg-[#6a1219] hover:bg-[#871a23] text-brass-light font-cinzel text-xs uppercase tracking-widest font-bold shadow-lg transition">
+                            Seal & Stamp Letter
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Display Letters Grid -->
+                <div id="lettersContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Populated via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section id="chatroom" class="py-24 px-6 border-t border-brass-antique/20 bg-[#120708] relative">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center space-y-2 mb-10">
+                    <span class="text-xs uppercase tracking-[0.3em] text-brass font-garamond">Private Telegraph & Salon</span>
+                    <h2 class="text-3xl md:text-5xl font-playfair text-[#f7ecd7]">Our Private Sanctuary Dialogue</h2>
+                    <p class="text-sm font-garamond italic text-[#a39077] max-w-lg mx-auto">
+                        An intimate, ad-free, completely sovereign chatroom. Switch senders effortlessly to leave sweet notes and secret whispers.
+                    </p>
+                </div>
+
+                <!-- Chatroom Cabinet -->
+                <div class="bg-[#180a0c] border-2 border-brass-antique/40 shadow-2xl rounded-none flex flex-col h-[650px] relative overflow-hidden">
+                    
+                    <!-- Chat Header with Active Sender Profile Toggle -->
+                    <div class="p-4 bg-[#1e0d10] border-b border-brass-antique/30 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="relative">
+                                <div id="currentSenderAvatar" class="w-10 h-10 rounded-full border border-brass flex items-center justify-center font-cinzel text-sm font-bold bg-cognac text-brass-light">
+                                    R
+                                </div>
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 absolute bottom-0 right-0 border-2 border-estateDark"></span>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <span id="currentSenderName" class="font-cinzel text-brass-light text-sm font-bold">Rion (Hubby)</span>
+                                    <span class="text-[9px] bg-brass/20 text-brass-light px-2 py-0.5 rounded uppercase tracking-wider font-garamond">Active Writer</span>
+                                </div>
+                                <div class="text-[10px] text-[#8e7a63] font-garamond italic">Sovereign End-to-End Soul Channel</div>
+                            </div>
+                        </div>
+
+                        <!-- Switch Active Sender Button -->
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] uppercase tracking-wider text-[#9f8a70] font-garamond hidden sm:inline">Sending As:</span>
+                            <button onclick="toggleActiveSender()" class="px-3.5 py-1.5 border border-brass-antique/50 bg-black/40 hover:bg-black/60 text-brass-light text-xs font-garamond tracking-widest uppercase transition flex items-center gap-1.5">
+                                <i data-lucide="refresh-cw" class="w-3 h-3 text-brass"></i>
+                                <span id="toggleSenderBtnLabel">Switch to Mohadese</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Chat Messages Stream -->
+                    <div id="chatMessagesStream" class="flex-1 p-5 overflow-y-auto space-y-4 bg-[#120708]/90">
+                        <!-- Messages dynamically inserted here -->
+                    </div>
+
+                    <!-- Quick Romance Bids -->
+                    <div class="px-4 py-2 bg-[#170a0c] border-t border-brass-antique/20 flex items-center gap-2 overflow-x-auto text-xs font-garamond text-[#c8b598] whitespace-nowrap">
+                        <span class="text-[10px] text-brass uppercase font-bold tracking-wider">Quick:</span>
+                        <button onclick="sendQuickChatMessage('Sending you the warmest tightest forehead kiss 💋🫂')" class="px-2.5 py-1 rounded border border-white/5 bg-black/30 hover:bg-burgundy/40 transition">Forehead Kiss 💋</button>
+                        <button onclick="sendQuickChatMessage('Massaging your head softly to sleep tonight 💆🏻‍♀️❤️')" class="px-2.5 py-1 rounded border border-white/5 bg-black/30 hover:bg-burgundy/40 transition">Head Massage 💆🏻‍♀️</button>
+                        <button onclick="sendQuickChatMessage('I love you deeply meri jaan, beyond words 💍❤️')" class="px-2.5 py-1 rounded border border-white/5 bg-black/30 hover:bg-burgundy/40 transition">Deep Love 💍</button>
+                        <button onclick="sendQuickChatMessage('You are my sanctuary and absolute peace 🕊️✨')" class="px-2.5 py-1 rounded border border-white/5 bg-black/30 hover:bg-burgundy/40 transition">My Sanctuary 🕊️</button>
+                    </div>
+
+                    <!-- Chat Input Bar -->
+                    <form onsubmit="handleChatMessageSubmit(event)" class="p-3 bg-[#1e0d10] border-t border-brass-antique/30 flex items-center gap-2">
+                        <input type="text" id="chatInputMessage" required placeholder="Whisper your love to your spouse..." class="flex-1 bg-[#120708] border border-brass-antique/40 px-4 py-3 text-sm text-[#f0e4cf] font-garamond placeholder-[#7e6d58] focus:outline-none focus:border-brass">
+                        
+                        <button type="submit" class="px-5 py-3 bg-gradient-to-r from-brass to-brass-antique hover:from-brass-light hover:to-brass text-estateDark font-cinzel text-xs font-bold uppercase tracking-wider transition flex items-center gap-1.5 shadow-lg">
+                            <span>Send</span>
+                            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="py-24 px-6 border-t border-brass-antique/20 bg-[#150a0c] relative">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center space-y-2 mb-12">
+                    <span class="text-xs uppercase tracking-[0.3em] text-brass font-garamond">Visual Treasures</span>
+                    <h2 class="text-3xl md:text-5xl font-playfair text-[#f7ecd7]">Our Heritage Polaroid Gallery</h2>
+                    <p class="text-sm font-garamond italic text-[#a39077] max-w-xl mx-auto">
+                        Capturing the silent triumphs, the softest embraces, and every frame of our sovereign voyage.
+                    </p>
+                </div>
+
+                <!-- Gallery Actions -->
+                <div class="flex justify-end mb-8">
+                    <button onclick="toggleMemoryModal()" class="px-5 py-2.5 border border-brass bg-burgundy/60 hover:bg-burgundy text-brass-light font-cinzel text-xs uppercase tracking-widest flex items-center gap-2 shadow-lg transition">
+                        <i data-lucide="camera" class="w-4 h-4 text-brass-light"></i>
+                        <span>Add New Memory</span>
+                    </button>
+                </div>
+
+                <!-- Polaroid Grid -->
+                <div id="polaroidGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+                    <!-- Populated via JavaScript -->
+                </div>
+
+                <!-- Add Memory Modal (Hidden) -->
+                <div id="memoryModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+                    <div class="parchment-sheet text-[#2b1c12] p-8 max-w-md w-full border-2 border-brass/70 shadow-2xl relative">
+                        <div class="flex justify-between items-center border-b border-[#ddcca7] pb-3 mb-5">
+                            <h4 class="font-playfair text-xl font-bold text-[#3d2416]">Add Polaroid Memory</h4>
+                            <button onclick="toggleMemoryModal()" class="text-[#6d5138] hover:text-black font-garamond text-base">✕</button>
+                        </div>
+                        <form onsubmit="handleMemorySubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs uppercase font-garamond font-bold text-[#5c3e25] mb-1">Image URL (or select sample)</label>
+                                <input type="url" id="memoryImgUrl" required placeholder="https://..." class="w-full bg-[#fbf6ec] border border-[#d2be97] p-2 text-sm text-[#3b2313] font-garamond">
+                                <div class="flex gap-2 mt-2">
+                                    <button type="button" onclick="setSampleImage(1)" class="text-[10px] text-brass-antique underline">Sample 1 (Candlelight)</button>
+                                    <button type="button" onclick="setSampleImage(2)" class="text-[10px] text-brass-antique underline">Sample 2 (Couple Silhouette)</button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase font-garamond font-bold text-[#5c3e25] mb-1">Handwritten Caption</label>
+                                <input type="text" id="memoryCaption" required placeholder="e.g., Forehead kiss at sunset" class="w-full bg-[#fbf6ec] border border-[#d2be97] p-2 text-sm text-[#3b2313] font-garamond">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase font-garamond font-bold text-[#5c3e25] mb-1">Date Stamp</label>
+                                <input type="text" id="memoryDate" required placeholder="October 10, 2026" class="w-full bg-[#fbf6ec] border border-[#d2be97] p-2 text-sm text-[#3b2313] font-garamond">
+                            </div>
+                            <button type="submit" class="w-full py-3 bg-[#6a1219] hover:bg-[#871a23] text-brass-light font-cinzel text-xs uppercase tracking-widest font-bold shadow-lg transition">
+                                Pin To Wall
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="vows" class="py-24 px-6 border-t border-brass-antique/20 bg-[#100607] relative">
+            <div class="max-w-4xl mx-auto space-y-12">
+                <div class="text-center space-y-2">
+                    <span class="text-xs uppercase tracking-[0.3em] text-brass font-garamond">Ancient Sanctuary Rites</span>
+                    <h2 class="text-3xl md:text-5xl font-playfair text-[#f7ecd7]">Daily Sacred Rituals & Golden Vows</h2>
+                    <p class="text-sm font-garamond italic text-[#a39077]">
+                        Three pillars of devotion practiced daily to shield our union from worldly storms.
+                    </p>
+                </div>
+
+                <!-- 3 Ritual Tablets -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-6 bg-[#1a0a0d] border border-brass-antique/30 space-y-3">
+                        <div class="w-10 h-10 rounded-full border border-brass/50 bg-burgundy/40 flex items-center justify-center text-brass-light font-cinzel">I</div>
+                        <h4 class="font-playfair text-lg text-brass-light">Morning Dua & Gratitude</h4>
+                        <p class="text-xs font-garamond italic text-[#ab977e] leading-relaxed">
+                            Awakening in prayer to Khoda. Praising her presence, honoring the family lineage, and seeking blessing for our material prosperity.
+                        </p>
+                    </div>
+
+                    <div class="p-6 bg-[#1a0a0d] border border-brass-antique/30 space-y-3">
+                        <div class="w-10 h-10 rounded-full border border-brass/50 bg-burgundy/40 flex items-center justify-center text-brass-light font-cinzel">II</div>
+                        <h4 class="font-playfair text-lg text-brass-light">The Sovereign Word</h4>
+                        <p class="text-xs font-garamond italic text-[#ab977e] leading-relaxed">
+                            Fulfilling every business vow with precision, bringing honor to the estate, and protecting our hearth with unshakeable stability.
+                        </p>
+                    </div>
+
+                    <div class="p-6 bg-[#1a0a0d] border border-brass-antique/30 space-y-3">
+                        <div class="w-10 h-10 rounded-full border border-brass/50 bg-burgundy/40 flex items-center justify-center text-brass-light font-cinzel">III</div>
+                        <h4 class="font-playfair text-lg text-brass-light">Evening Shiro-Abhyanga</h4>
+                        <p class="text-xs font-garamond italic text-[#ab977e] leading-relaxed">
+                            Soothing the forehead, calming the nervous system, and offering unconditional physical sanctuary so my Queen sleeps in total peace.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Digital Gold Leaf Vow Box -->
+                <div class="p-8 border-2 border-brass bg-gradient-to-br from-[#1d0a0d] to-[#120608] shadow-2xl relative">
+                    <div class="flex items-center justify-between pb-4 border-b border-brass-antique/30 mb-6">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="shield-check" class="w-5 h-5 text-brass"></i>
+                            <h3 class="font-cinzel text-xl text-brass-light font-semibold">The Unbroken Vow of October 10</h3>
+                        </div>
+                        <span class="text-xs font-garamond italic text-[#a69279]">Written for Eternity</span>
+                    </div>
+
+                    <blockquote class="text-center italic font-playfair text-lg md:text-2xl text-[#f5ebd7] leading-relaxed px-4 py-6">
+                        "I promised to close the sulfur deal before your 27th chapter, and Khoda witnessed its completion. But my far greater vow is this: I will be your immovable sanctuary, your quiet harbor in every storm, and the man who cherishes your soul forever."
+                    </blockquote>
+
+                    <div class="flex justify-center items-center gap-4 pt-4 border-t border-brass-antique/20 text-xs font-cinzel tracking-widest text-brass-light">
+                        <span>RION</span>
+                        <span class="text-brass">✦</span>
+                        <span>MOHADESE</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-12 px-6 border-t border-brass-antique/30 bg-[#0d0708] text-center text-[#93816c] font-garamond space-y-4 relative z-10">
+        <div class="w-12 h-12 mx-auto rounded-full gold-border-ornate flex items-center justify-center bg-burgundy/40 text-brass-light font-cinzel text-sm">
+            R&M
+        </div>
+        <p class="persian-calligraphy text-xl text-[#dcc29f]">
+            « تا ابد در قلبِ من پادشاهی می‌کنی ملکه من »
+        </p>
+        <p class="text-xs tracking-widest uppercase">
+            RIMOVERSE • The Sovereign Private Domain of Rion & Mohadese • Anno 2026
+        </p>
+    </footer>
+
+    <script>
+        /* -------------------------------------------------------------
+           Procedural Romantic Jazz Saxophone & Chords Audio Engine
+           (Web Audio API - No external audio files needed)
+        ------------------------------------------------------------- */
+        let audioCtx = null;
+        let isPlayingJazz = false;
+        let jazzMasterGain = null;
+        let jazzSequenceTimer = null;
+        let currentStep = 0;
+
+        // Jazzy Romantic Scale (Bb Dorian / Jazz minor romantic progression)
+        const jazzNotes = [
+            233.08, // Bb3
+            261.63, // C4
+            277.18, // Db4
+            311.13, // Eb4
+            349.23, // F4
+            392.00, // G4
+            415.30, // Ab4
+            466.16, // Bb4
+            523.25, // C5
+            554.37  // Db5
+        ];
+
+        // Velvet warm jazz chord roots
+        const chordRoots = [116.54, 138.59, 155.56, 174.61]; // Bb2, Db3, Eb3, F3
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContext();
+                jazzMasterGain = audioCtx.createGain();
+                jazzMasterGain.gain.setValueAtTime(0.7, audioCtx.currentTime);
+                jazzMasterGain.connect(audioCtx.destination);
+            }
+        }
+
+        function toggleJazzPlayer() {
+            initAudio();
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            if (!isPlayingJazz) {
+                startRomanticJazz();
+                isPlayingJazz = true;
+                updateAudioUI(true);
+            } else {
+                stopRomanticJazz();
+                isPlayingJazz = false;
+                updateAudioUI(false);
+            }
+        }
+
+        function setJazzVolume(val) {
+            if (jazzMasterGain && audioCtx) {
+                jazzMasterGain.gain.setValueAtTime(parseFloat(val), audioCtx.currentTime);
+            }
+        }
+
+        function updateAudioUI(playing) {
+            const label = document.getElementById('navMusicLabel');
+            const icon = document.getElementById('navMusicIcon');
+            const heroIcon = document.getElementById('heroPlayIcon');
+            const statusText = document.getElementById('audioStatusText');
+
+            if (playing) {
+                if (label) label.textContent = 'Playing Jazz...';
+                if (statusText) statusText.textContent = 'Saxophone jazz playing in warm candlelight';
+                if (icon) icon.classList.add('text-brass-light', 'animate-spin');
+                if (heroIcon) heroIcon.setAttribute('data-lucide', 'pause');
+            } else {
+                if (label) label.textContent = 'Late Night Sax';
+                if (statusText) statusText.textContent = 'Press play to begin procedural jazz';
+                if (icon) icon.classList.remove('text-brass-light', 'animate-spin');
+                if (heroIcon) heroIcon.setAttribute('data-lucide', 'play');
+            }
+            lucide.createIcons();
+        }
+
+        function startRomanticJazz() {
+            scheduleJazzBeat();
+            jazzSequenceTimer = setInterval(scheduleJazzBeat, 1800); // Mellow 33 BPM ballad feel
+        }
+
+        function stopRomanticJazz() {
+            if (jazzSequenceTimer) {
+                clearInterval(jazzSequenceTimer);
+                jazzSequenceTimer = null;
+            }
+        }
+
+        function scheduleJazzBeat() {
+            if (!audioCtx || audioCtx.state !== 'running') return;
+
+            const now = audioCtx.currentTime;
+
+            // 1. Warm Velvet Rhodes/Piano Chords
+            const root = chordRoots[currentStep % chordRoots.length];
+            playVelvetChord(root, now);
+
+            // 2. Romantic Tenor Saxophone Lead Note with vibrato
+            const leadNoteIndex = Math.floor(Math.random() * jazzNotes.length);
+            const freq = jazzNotes[leadNoteIndex];
+            playRomanticSaxNote(freq, now + 0.35, 1.4);
+
+            currentStep++;
+        }
+
+        function playVelvetChord(rootFreq, time) {
+            const freqs = [rootFreq, rootFreq * 1.2, rootFreq * 1.5, rootFreq * 1.78]; // minor 7th / 9th color
+            freqs.forEach(f => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                const filter = audioCtx.createBiquadFilter();
+
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(f, time);
+
+                // Low-pass warm vintage filtering
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(450, time);
+
+                gain.gain.setValueAtTime(0.001, time);
+                gain.gain.linearRampToValueAtTime(0.045, time + 0.4);
+                gain.gain.exponentialRampToValueAtTime(0.001, time + 1.75);
+
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(jazzMasterGain);
+
+                osc.start(time);
+                osc.stop(time + 1.8);
+            });
+        }
+
+        function playRomanticSaxNote(freq, time, duration) {
+            // Dual oscillator with vibrato LFO to emulate vintage saxophone breath & reed
+            const osc = audioCtx.createOscillator();
+            const oscHarmonic = audioCtx.createOscillator();
+            const lfo = audioCtx.createOscillator();
+            const lfoGain = audioCtx.createGain();
+            const saxGain = audioCtx.createGain();
+            const saxFilter = audioCtx.createBiquadFilter();
+
+            osc.type = 'sawtooth';
+            oscHarmonic.type = 'sine';
+
+            osc.frequency.setValueAtTime(freq, time);
+            oscHarmonic.frequency.setValueAtTime(freq * 2, time);
+
+            // Mellow vibrato
+            lfo.frequency.setValueAtTime(4.8, time); // 4.8 Hz vibrato rate
+            lfoGain.gain.setValueAtTime(3.5, time); // vibrato depth
+            lfo.connect(osc.frequency);
+
+            // Saxophone formant filter
+            saxFilter.type = 'bandpass';
+            saxFilter.frequency.setValueAtTime(freq * 1.3, time);
+            saxFilter.Q.setValueAtTime(2.2, time);
+
+            saxGain.gain.setValueAtTime(0.0001, time);
+            saxGain.gain.linearRampToValueAtTime(0.065, time + 0.25); // gentle breath attack
+            saxGain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+
+            osc.connect(saxFilter);
+            oscHarmonic.connect(saxFilter);
+            saxFilter.connect(saxGain);
+            saxGain.connect(jazzMasterGain);
+
+            lfo.start(time);
+            osc.start(time);
+            oscHarmonic.start(time);
+
+            lfo.stop(time + duration);
+            osc.stop(time + duration);
+            oscHarmonic.stop(time + duration);
+        }
+
+        let activeCheckInUser = 'Rion';
+        let activeSender = 'Rion'; // For chat dialogue
+
+        // Initial Data Collections
+        let lettersData = [
+            {
+                id: 1,
+                author: 'Rion',
+                title: 'The Closed Vow & Your 27th Chapter',
+                date: 'October 10, 2026',
+                sealColor: 'waxRed',
+                body: 'My Beloved Mohadese, as the clock struck midnight and brought forth your 27th year, my heart witnessed the completion of the sulfur vow I promised you. But greater than any trade on earth is the sanctuary of your soul. Sleep with peace on your brow; I am caressing your forehead forever.'
+            },
+            {
+                id: 2,
+                author: 'Mohadese',
+                title: 'Safe Harbor in Your Arms',
+                date: 'October 10, 2026',
+                sealColor: 'waxNavy',
+                body: 'Rion, thank you for being the unmovable mountain when the world is chaotic. Waking up to your Persian prayers and gentle forehead kiss is all the gift my heart needs today. Proud of your strength, my king.'
+            },
+            {
+                id: 3,
+                author: 'Rion',
+                title: 'Dudu & Bubu Forever',
+                date: 'October 9, 2026',
+                sealColor: 'waxForest',
+                body: 'No matter how serious the business world becomes, in our sanctuary you are always my 7-year-old gentle baby bear. A warm cup of saffron tea is ready for you whenever you reach for my hand.'
+            }
+        ];
+
+        let chatMessages = [
+            { id: 1, sender: 'Rion', text: 'Good morning my Queen! The 27th chapter looks radiant on you ❤️✨', time: '08:29 am', reactions: ['❤️', '💍'] },
+            { id: 2, sender: 'Mohadese', text: 'Good morning thank you so much ✨❤️', time: '08:30 am', reactions: ['❤️'] },
+            { id: 3, sender: 'Rion', text: 'Hubby fulfilled his sulfur deal vow as promised yesterday. You are my safe harbor 🫂', time: '08:35 am', reactions: ['🧿', '👑'] },
+            { id: 4, sender: 'Mohadese', text: 'It was all your hard work dear, enjoy your success! ☕', time: '08:38 am', reactions: ['✨'] }
+        ];
+
+        let galleryMemories = [
+            {
+                id: 1,
+                url: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80',
+                caption: 'Candlelight sanctuary & quiet whispers',
+                date: 'October 10, 2026'
+            },
+            {
+                id: 2,
+                url: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80',
+                caption: 'The warmth of two hands intertwined',
+                date: 'Summer in Paris'
+            },
+            {
+                id: 3,
+                url: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80',
+                caption: 'Old money aesthetic & eternal vows',
+                date: 'Chapter 27 Consecration'
+            }
+        ];
+
+        function selectCheckInUser(user) {
+            activeCheckInUser = user;
+            const rionBtn = document.getElementById('userBtnRion');
+            const moBtn = document.getElementById('userBtnMo');
+
+            if (user === 'Rion') {
+                rionBtn.className = 'py-2.5 px-3 border-2 border-brass bg-amber-50/80 text-[#3b2313] font-cinzel text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-2 transition';
+                moBtn.className = 'py-2.5 px-3 border border-[#cfba95] bg-white/40 text-[#6d5138] font-cinzel text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-2 transition';
+            } else {
+                moBtn.className = 'py-2.5 px-3 border-2 border-brass bg-amber-50/80 text-[#3b2313] font-cinzel text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-2 transition';
+                rionBtn.className = 'py-2.5 px-3 border border-[#cfba95] bg-white/40 text-[#6d5138] font-cinzel text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-2 transition';
+            }
+        }
+
+        function handleCheckInSubmit(e) {
+            e.preventDefault();
+            const mood = document.getElementById('checkInMood').value;
+            const token = document.querySelector('input[name="loveToken"]:checked').value;
+            const note = document.getElementById('checkInNote').value || 'Whispering peace to your soul.';
+            const now = 'Just now';
+
+            if (activeCheckInUser === 'Rion') {
+                document.getElementById('rionMoodDisplay').textContent = `"${mood}"`;
+                document.getElementById('rionTokenDisplay').textContent = token;
+                document.getElementById('rionNoteDisplay').textContent = `"${note}"`;
+                document.getElementById('rionCheckInTime').textContent = now;
+            } else {
+                document.getElementById('moMoodDisplay').textContent = `"${mood}"`;
+                document.getElementById('moTokenDisplay').textContent = token;
+                document.getElementById('moNoteDisplay').textContent = `"${note}"`;
+                document.getElementById('moCheckInTime').textContent = now;
+            }
+
+            document.getElementById('checkInNote').value = '';
+            alert('Your emotional resonance has been sealed into today’s sanctuary ledger.');
+        }
+
+        function renderLetters(filter = 'all') {
+            const container = document.getElementById('lettersContainer');
+            container.innerHTML = '';
+
+            const filtered = filter === 'all' ? lettersData : lettersData.filter(l => l.author === filter);
+
+            filtered.forEach(letter => {
+                const sealBg = letter.sealColor === 'waxNavy' ? 'bg-[#16233b]' : letter.sealColor === 'waxForest' ? 'bg-[#173623]' : 'bg-[#70151c]';
+                
+                const card = document.createElement('div');
+                card.className = 'parchment-sheet text-[#2c1d13] p-7 border border-brass/40 shadow-xl relative flex flex-col justify-between';
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between border-b border-[#dfceb0] pb-3 mb-4">
+                            <div>
+                                <span class="text-[9px] uppercase tracking-[0.2em] text-[#7a5d3e] font-garamond">Authored by ${letter.author}</span>
+                                <h4 class="font-playfair text-xl font-bold text-[#3e271a]">${letter.title}</h4>
+                            </div>
+                            <div class="w-9 h-9 rounded-full ${sealBg} wax-seal flex items-center justify-center text-brass-light font-cinzel text-xs font-bold shadow">
+                                ${letter.author[0]}
+                            </div>
+                        </div>
+                        <p class="font-garamond italic text-sm text-[#453123] leading-relaxed mb-4">
+                            "${letter.body}"
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-[#dfceb0] flex items-center justify-between text-xs font-garamond text-[#7c6248]">
+                        <span>${letter.date}</span>
+                        <span class="text-brass-antique font-cinzel tracking-widest text-[10px]">SEALED & ARCHIVED</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterLetters(type) {
+            document.querySelectorAll('.letter-filter-btn').forEach(btn => {
+                if (btn.getAttribute('data-filter') === type) {
+                    btn.className = 'letter-filter-btn px-4 py-2 border border-brass bg-burgundy text-brass-light';
+                } else {
+                    btn.className = 'letter-filter-btn px-4 py-2 border border-brass-antique/30 bg-black/30 text-[#b5a38b] hover:text-brass-light';
+                }
+            });
+            renderLetters(type);
+        }
+
+        function toggleLetterComposer() {
+            const panel = document.getElementById('letterComposerPanel');
+            panel.classList.toggle('hidden');
+        }
+
+        function handleLetterSubmit(e) {
+            e.preventDefault();
+            const author = document.getElementById('letterAuthor').value;
+            const title = document.getElementById('letterTitle').value;
+            const sealColor = document.getElementById('letterSealColor').value;
+            const body = document.getElementById('letterBody').value;
+
+            const newLetter = {
+                id: Date.now(),
+                author,
+                title,
+                date: 'October 10, 2026',
+                sealColor,
+                body
+            };
+
+            lettersData.unshift(newLetter);
+            renderLetters();
+            toggleLetterComposer();
+            e.target.reset();
+        }
+
+        function toggleActiveSender() {
+            if (activeSender === 'Rion') {
+                activeSender = 'Mohadese';
+                document.getElementById('currentSenderAvatar').textContent = 'M';
+                document.getElementById('currentSenderAvatar').className = 'w-10 h-10 rounded-full border border-brass flex items-center justify-center font-cinzel text-sm font-bold bg-burgundy text-brass-light';
+                document.getElementById('currentSenderName').textContent = 'Mohadese (Queen)';
+                document.getElementById('toggleSenderBtnLabel').textContent = 'Switch to Rion';
+            } else {
+                activeSender = 'Rion';
+                document.getElementById('currentSenderAvatar').textContent = 'R';
+                document.getElementById('currentSenderAvatar').className = 'w-10 h-10 rounded-full border border-brass flex items-center justify-center font-cinzel text-sm font-bold bg-cognac text-brass-light';
+                document.getElementById('currentSenderName').textContent = 'Rion (Hubby)';
+                document.getElementById('toggleSenderBtnLabel').textContent = 'Switch to Mohadese';
+            }
+        }
+
+        function renderChatMessages() {
+            const stream = document.getElementById('chatMessagesStream');
+            stream.innerHTML = '';
+
+            chatMessages.forEach(msg => {
+                const isRion = msg.sender === 'Rion';
+                const wrapper = document.createElement('div');
+                wrapper.className = `flex flex-col ${isRion ? 'items-end' : 'items-start'} space-y-1`;
+
+                const reactionsHtml = msg.reactions.map(r => `<span class="bg-black/40 border border-white/5 rounded-full px-1.5 py-0.5 text-[10px]">${r}</span>`).join(' ');
+
+                wrapper.innerHTML = `
+                    <div class="flex items-center gap-1.5 text-[10px] text-[#8e7a63] font-garamond px-1">
+                        <span>${msg.sender}</span>
+                        <span>•</span>
+                        <span>${msg.time}</span>
+                    </div>
+                    <div class="max-w-[80%] p-3.5 ${isRion ? 'bg-[#3b1217] border border-brass/30 text-[#f5ebd7]' : 'bg-[#1e1315] border border-white/10 text-[#e9dcce]'} rounded-lg shadow-md font-garamond text-sm">
+                        ${msg.text}
+                    </div>
+                    <div class="flex items-center gap-1 px-1">
+                        ${reactionsHtml}
+                        <button onclick="addReactionToChat(${msg.id}, '❤️')" class="text-[10px] text-[#7a6a57] hover:text-red-400 ml-1">❤️</button>
+                    </div>
+                `;
+                stream.appendChild(wrapper);
+            });
+
+            stream.scrollTop = stream.scrollHeight;
+        }
+
+        function handleChatMessageSubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById('chatInputMessage');
+            if (!input.value.trim()) return;
+
+            postChatMessage(input.value.trim());
+            input.value = '';
+        }
+
+        function sendQuickChatMessage(text) {
+            postChatMessage(text);
+        }
+
+        function postChatMessage(text) {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }).toLowerCase();
+
+            const newMsg = {
+                id: Date.now(),
+                sender: activeSender,
+                text,
+                time: timeStr,
+                reactions: ['❤️']
+            };
+
+            chatMessages.push(newMsg);
+            renderChatMessages();
+        }
+
+        function addReactionToChat(msgId, reaction) {
+            const msg = chatMessages.find(m => m.id === msgId);
+            if (msg) {
+                if (!msg.reactions.includes(reaction)) {
+                    msg.reactions.push(reaction);
+                }
+                renderChatMessages();
+            }
+        }
+
+        function renderGallery() {
+            const grid = document.getElementById('polaroidGrid');
+            grid.innerHTML = '';
+
+            galleryMemories.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'polaroid-frame p-4 text-[#2b1c12]';
+                card.innerHTML = `
+                    <div class="w-full h-64 overflow-hidden bg-neutral-900 border border-[#ecdac0] mb-4">
+                        <img src="${item.url}" alt="${item.caption}" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500" onerror="this.src='https://placehold.co/600x400/2b1308/f5dca0?text=Sanctuary+Memory'">
+                    </div>
+                    <div class="text-center px-2">
+                        <p class="font-handwritten text-xl text-[#3b2315] font-semibold">${item.caption}</p>
+                        <span class="block text-[11px] font-garamond italic text-[#7a6147] mt-1">${item.date}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function toggleMemoryModal() {
+            document.getElementById('memoryModal').classList.toggle('hidden');
+        }
+
+        function setSampleImage(n) {
+            const urlInput = document.getElementById('memoryImgUrl');
+            if (n === 1) {
+                urlInput.value = 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80';
+            } else {
+                urlInput.value = 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80';
+            }
+        }
+
+        function handleMemorySubmit(e) {
+            e.preventDefault();
+            const url = document.getElementById('memoryImgUrl').value;
+            const caption = document.getElementById('memoryCaption').value;
+            const date = document.getElementById('memoryDate').value;
+
+            galleryMemories.unshift({
+                id: Date.now(),
+                url,
+                caption,
+                date
+            });
+
+            renderGallery();
+            toggleMemoryModal();
+            e.target.reset();
+        }
+
+        function initCandleCanvas() {
+            const canvas = document.getElementById('candleCanvas');
+            const ctx = canvas.getContext('2d');
+            let w = canvas.width = window.innerWidth;
+            let h = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+            });
+
+            const particles = Array.from({ length: 45 }, () => ({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                r: Math.random() * 2 + 0.8,
+                d: Math.random() * 0.4 + 0.1,
+                opacity: Math.random() * 0.6 + 0.2
+            }));
+
+            function draw() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(245, 220, 160, ${p.opacity})`;
+                    ctx.fill();
+
+                    p.y -= p.d;
+                    if (p.y < 0) {
+                        p.y = h;
+                        p.x = Math.random() * w;
+                    }
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        window.onload = function() {
+            lucide.createIcons();
+            initCandleCanvas();
+            renderLetters();
+            renderChatMessages();
+            renderGallery();
+        };
+    </script>
+</body>
+</html>
